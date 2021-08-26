@@ -23,3 +23,21 @@ exports.getPhotos = async (req, res) => {
         res.status(400).json({ success: false, message: error });
     }
 }
+
+exports.updatePhoto = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, url } = req.body;
+        const photo = await Photo.findOne({ where: { id } });
+        if(photo) {
+            photo.name = name;
+            photo.url = url;
+            photo.save();
+            return res.status(201).json({ success: true, message: photo });
+        }
+        return res.status(400).json({ success: false, message: `Photo with id:${id} doesn't exist` });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ success: false, message: error });
+    }
+}

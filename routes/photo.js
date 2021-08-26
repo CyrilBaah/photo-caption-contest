@@ -4,6 +4,7 @@ const photoController = require('../controller/api/photo');
 
 router.post('/api/photos', photoController.createPhoto);
 router.get('/api/photos', photoController.getPhotos);
+router.put('/api/photos/:id', photoController.updatePhoto);
 
 
 module.exports = router;
