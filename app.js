@@ -7,8 +7,10 @@ app.use(express.json());
 
 
 const userRoute = require('./routes/user');
+const photoRoute = require('./routes/photo');
 
 app.use(userRoute);
+app.use(photoRoute);
 
 const PORT = process.env.PORT;
 app.listen(PORT, async () => {
