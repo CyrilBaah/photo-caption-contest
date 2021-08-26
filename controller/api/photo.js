@@ -41,3 +41,18 @@ exports.updatePhoto = async (req, res) => {
         res.status(400).json({ success: false, message: error });
     }
 }
+
+exports.deletePhoto = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const photo = await Photo.findOne({ where: { id } });
+        if(photo) {
+            photo.destroy();
+            return res.status(204).json({ success: true, message: photo });
+        }
+        return res.status(400).json({ success: false, message: `photo with id:${id} doesn't exist` });
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({ success: false, message: error });
+    }
+}
